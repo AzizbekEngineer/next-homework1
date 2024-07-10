@@ -1,21 +1,21 @@
+"use client";
 import React from "react";
-import { PRODUCT } from "@/static";
 import Image from "next/image";
 import "./product.scss";
 import Link from "next/link";
 
-const Product = ({ limit, title, desc }) => {
+const ProductData = ({ data, limit, title, desc }) => {
   return (
     <div className="product">
       <div className="container">
         <h3 className="product__sec__title">{title}</h3>
         <p className="product__desc">{desc}</p>
         <div className="product__cards">
-          {PRODUCT?.slice(0, limit).map((el) => (
+          {data?.products?.slice(0, limit).map((el) => (
             <div className="product__card" key={el.id}>
               <div className="product__img">
                 <Link href={`/product/${el.id}`}>
-                  <Image src={el.img} />
+                  <Image width={200} height={200} src={el?.images[0]} />
                 </Link>
               </div>
               <div className="product__info">
@@ -30,4 +30,4 @@ const Product = ({ limit, title, desc }) => {
   );
 };
 
-export default Product;
+export default ProductData;

@@ -1,10 +1,9 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import Hero from "@/components/hero/Hero";
-import Product from "@/components/product/Product";
 import Client from "@/components/client/Client";
 import User from "@/components/users/User";
-import Footer from "@/components/footer/Footer";
+import Product from "./product/page";
 
 export default function Home() {
   return (
