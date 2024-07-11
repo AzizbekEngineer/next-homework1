@@ -3,7 +3,7 @@ import "./loading.scss";
 
 const Loading = () => {
   const lodingCard = (
-    <div class="loading">
+    <div class="loading container">
       <div class="loading__item">
         <div class="loading__img bg__animation"></div>
         <div class="loading__title bg__animation"></div>

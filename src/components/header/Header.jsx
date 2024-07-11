@@ -30,8 +30,12 @@ const Header = () => {
           >
             <IoIosCloseCircle />
           </li>
-          <li className="header__item">Discovery</li>
-          <li className="header__item">About</li>
+          <li className="header__item">
+            <Link href={"/wishlist"}>Wishlist</Link>
+          </li>
+          <li className="header__item">
+            <Link href={"/cart"}>Cart</Link>
+          </li>
           <li className="header__item">Contact us</li>
         </ul>
         <div className="header__icons">

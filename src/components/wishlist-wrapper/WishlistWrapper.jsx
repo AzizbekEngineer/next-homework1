@@ -1,39 +1,30 @@
 "use client";
-import React from "react";
+import { toggleHeart } from "@/app/lib/features/wishlist/wishlistSlice";
 import Image from "next/image";
 import { FaRegHeart } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import { FaHeart } from "react-icons/fa";
-import { FaShoppingCart } from "react-icons/fa";
-import "./product.scss";
-import Link from "next/link";
-import { useGetProductsQuery } from "@/app/lib/api/productApi";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleHeart } from "@/app/lib/features/wishlist/wishlistSlice";
-import { add } from "@/app/lib/features/cart/cartSlice";
 
-const ProductData = ({ limit, title, desc }) => {
-  const { data, isLoading } = useGetProductsQuery({ limit });
-  const dispatch = useDispatch();
+const WishlistWrapper = () => {
   const wishlist = useSelector((state) => state.wishlist.value);
-  const cart = useSelector((state) => state.cart.value);
-
+  const dispatch = useDispatch();
   return (
-    <div className="product">
-      <div className="container">
-        <h3 className="product__sec__title">{title}</h3>
-        <p className="product__desc">{desc}</p>
+    <div>
+      <div className="product">
         <div className="product__cards">
-          {data?.products?.map((el) => (
+          {wishlist.map((el) => (
             <div className="product__card" key={el.id}>
               <div className="product__img">
                 <Image
                   width={200}
                   height={200}
-                  src={el?.images[0]}
                   alt={el?.title}
+                  src={el?.images[0]}
                 />
-
+                {/* <Link href={`/product/${el.id}`}>
+                </Link> */}
                 <div className="product__slice">
                   <div className="product__btns">
                     <button onClick={() => dispatch(toggleHeart(el))}>
@@ -43,21 +34,14 @@ const ProductData = ({ limit, title, desc }) => {
                         <FaRegHeart color="red" />
                       )}
                     </button>
-                    <button onClick={() => dispatch(add(el))}>
-                      {cart?.some((item) => item.id === el.id) ? (
-                        <FaShoppingCart color=" #56B280" />
-                      ) : (
-                        <IoCartOutline />
-                      )}
+                    <button>
+                      <IoCartOutline />
                     </button>
                   </div>
                 </div>
               </div>
               <div className="product__info">
-                <Link href={`/product/${el.id}`}>
-                  <h3 className="product__title">{el.title}</h3>
-                </Link>
-
+                <h3 className="product__title">{el.title}</h3>
                 <h4 className="product__price">{el.price}</h4>
               </div>
             </div>
@@ -68,4 +52,4 @@ const ProductData = ({ limit, title, desc }) => {
   );
 };
 
-export default ProductData;
+export default WishlistWrapper;

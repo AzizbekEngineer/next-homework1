@@ -1,6 +1,5 @@
 import React from "react";
 import "./hero.scss";
-import Counter from "../counter/Counter";
 
 const Hero = () => {
   return (
@@ -13,7 +12,6 @@ const Hero = () => {
           your pleasure moments
         </p>
         <button className="hero__btn">Discovery our collection</button>
-        <Counter />
       </div>
     </div>
   );

@@ -26,23 +26,78 @@
 
     &__card {
         padding: 10px 15px;
-        border: 1px solid white;
+        border: 1px solid #ddd;
         box-shadow: 0px 4px 24px 0px #7B7B7B26;
     }
 
+    &__slice {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        width: 100%;
+        height: 100%;
+        background: #dddddd9c;
+        transition: .4s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        button {
+            padding: 10px;
+            border: none;
+            background: transparent;
+            border: 1px solid #56B280;
+            border-radius: 50%;
+            background: white;
+
+
+            svg {
+                font-size: 26px;
+            }
+        }
+
+        button:first-child {
+            svg {
+                color: red;
+            }
+        }
+
+        button:last-child {
+            svg {
+                color: #56B280;
+            }
+        }
+    }
+
     &__img {
+        position: relative;
         width: 100%;
         height: 240px;
-        background: #7B7B7B26;
+        background: black;
+        overflow: hidden;
 
         img {
             width: 100%;
             height: 100%;
             object-fit: contain;
         }
+
+        &:hover .product__slice {
+            left: 0;
+        }
     }
 
+
+    &__btns {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+
     &__info {
+        padding: 15px 0;
         background: white;
     }
 
