@@ -15,7 +15,7 @@ const wishlistSlice = createSlice({
       } else {
         state.value = state.value.filter((i) => i.id !== action.payload.id);
       }
-      //   localStorage.setItem("wishlist", JSON.stringify(state.value));
+      localStorage.setItem("wishlist", JSON.stringify(state.value));
     },
     defaultWishlist: (state, action) => {
       state.value = action.payload;
