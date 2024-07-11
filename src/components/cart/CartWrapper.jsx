@@ -10,6 +10,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import "./cart.scss";
 import Image from "next/image";
+import Empty from "../empty/Empty";
 
 const Cart = () => {
   const [modal, setModal] = useState(false);
@@ -85,35 +86,44 @@ const Cart = () => {
 
   console.log(cartData);
   return (
-    <div className="cart">
-      <div className="container">
-        <table className="cart__table">
-          <thead>
-            <tr>
-              <th>PRODUCT</th>
-              <th>PRICE</th>
-              <th>QTY</th>
-              <th>UNIT PRICE</th>
-            </tr>
-          </thead>
-          <tbody>{cartItem}</tbody>
-        </table>
-        <div className="cart__bottom">
-          <div className="cart__remove__all">
-            <button onClick={() => dispatch(removeAll())}>Remove All</button>
-          </div>
-          <div className="cart__bottom__price">
-            <div className="cart__bottom__left">
-              <h2>Sub-total :{sum}$</h2>
-              <p>Tax and shipping cost will be calculated later</p>
-            </div>
-            <div className="cart__bottom__right">
-              <button>Check-out</button>
+    <>
+      {cartData.length ? (
+        <div className="cart">
+          <div className="container">
+            <table className="cart__table">
+              <thead>
+                <tr>
+                  <th>PRODUCT</th>
+                  <th>PRICE</th>
+                  <th>QTY</th>
+                  <th>UNIT PRICE</th>
+                </tr>
+              </thead>
+              <tbody>{cartItem}</tbody>
+            </table>
+            <div className="cart__bottom">
+              <div className="cart__remove__all">
+                <button onClick={() => dispatch(removeAll())}>
+                  Remove All
+                </button>
+              </div>
+              <div className="cart__bottom__price">
+                <div className="cart__bottom__left">
+                  <h2>Sub-total :{sum}$</h2>
+                  <p>Tax and shipping cost will be calculated later</p>
+                </div>
+                <div className="cart__bottom__right">
+                  <button>Check-out</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <Empty url="https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-7359557-6024626.png?f=webp" />
+      )}
+      ;
+    </>
   );
 };
 

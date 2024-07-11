@@ -8,9 +8,13 @@ import { IoIosCloseCircle } from "react-icons/io";
 import { FaBars } from "react-icons/fa6";
 import "./header.scss";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [show, setShow] = useState(false);
+  const cartData = useSelector((state) => state.cart.value);
+  const wishlist = useSelector((state) => state.wishlist.value);
+
   return (
     <header className="header">
       <div
@@ -32,9 +36,11 @@ const Header = () => {
           </li>
           <li className="header__item">
             <Link href={"/wishlist"}>Wishlist</Link>
+            <sup>{wishlist.length}</sup>
           </li>
           <li className="header__item">
-            <Link href={"/cart"}>Cart</Link>
+            <Link href={"/cart"}>Cart </Link>
+            <sup>{cartData.length}</sup>
           </li>
           <li className="header__item">Contact us</li>
         </ul>
