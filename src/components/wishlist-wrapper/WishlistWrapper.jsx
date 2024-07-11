@@ -6,6 +6,7 @@ import { IoCartOutline } from "react-icons/io5";
 import { FaHeart } from "react-icons/fa";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import "../product/product.scss";
 
 const WishlistWrapper = () => {
   const wishlist = useSelector((state) => state.wishlist.value);
