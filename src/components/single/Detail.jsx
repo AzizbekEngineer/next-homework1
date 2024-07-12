@@ -6,13 +6,23 @@ import "./detail.scss";
 import ProductData from "../product/ProductData";
 import { useGetProductByIdQuery } from "@/app/lib/api/productApi";
 import Loading from "@/app/product/[id]/loading";
+import {
+  add,
+  decreaseAmount,
+  increaseAmount,
+  remove,
+} from "@/app/lib/features/cart/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Detail = ({ id }) => {
+  const dispatch = useDispatch();
+  const cartData = useSelector((state) => state.cart.value);
   const [count, setCount] = useState(0);
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
   const { data, isLoading } = useGetProductByIdQuery(id);
+  let existProduct = cartData.find((el) => el.id === data?.id);
   return (
     <div className="detail">
       {isLoading ? (
@@ -40,18 +50,32 @@ const Detail = ({ id }) => {
               <div className="detail__infos__left">
                 <h3 className="detail__price">{data?.price}</h3>
                 <h3 className="detail__quantity">Quantity</h3>
-                <div className="detail__counter">
+                {existProduct ? (
+                  <div className="detail__counter">
+                    <button
+                      onClick={() =>
+                        dispatch(
+                          existProduct?.amount > 1
+                            ? decreaseAmount(data)
+                            : remove(data)
+                        )
+                      }
+                    >
+                      -
+                    </button>
+                    <span> {existProduct?.amount}</span>
+                    <button onClick={() => dispatch(increaseAmount(data))}>
+                      +
+                    </button>
+                  </div>
+                ) : (
                   <button
-                    disabled={count === 0}
-                    onClick={() => setCount((prev) => prev - 1)}
+                    className="detail__btn"
+                    onClick={() => dispatch(add(data))}
                   >
-                    -
+                    <IoCartOutline /> <span>+ Add to cart</span>
                   </button>
-                  <span>{count}</span>
-                  <button onClick={() => setCount((prev) => prev + 1)}>
-                    +
-                  </button>
-                </div>
+                )}
               </div>
               <div className="detail__infos__right">
                 <div className="detail__item">
@@ -72,9 +96,12 @@ const Detail = ({ id }) => {
                   order. The discount will be applied at checkout.{" "}
                   <span>See details</span>
                 </p>
-                <button className="detail__btn">
+                {/* <button
+                  className="detail__btn"
+                  onClick={() => dispatch(add(data))}
+                >
                   <IoCartOutline /> <span>+ Add to cart</span>
-                </button>
+                </button> */}
               </div>
             </div>
             <div className="detail__information">
